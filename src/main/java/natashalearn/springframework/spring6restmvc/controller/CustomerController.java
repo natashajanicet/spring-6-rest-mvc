@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.http.HttpClient;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,6 +17,13 @@ import java.util.UUID;
 @RequestMapping("/api/v1/customer")
 public class CustomerController {
     private final CustomerService customerService;
+
+    @PatchMapping("/{customerId}")
+    public ResponseEntity updatePatchById(@PathVariable UUID customerId, @RequestBody Customer customer) {
+        customerService.patchCustomerById(customerId, customer);
+
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
 
     @DeleteMapping("/{customerId}")
     public ResponseEntity deleteById(@PathVariable UUID customerId) {
