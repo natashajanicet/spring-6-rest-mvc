@@ -49,13 +49,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer getCustomerById(UUID id) {
-        return Customer.builder()
-                .id(id)
-                .customerName("Customer Name")
-                .version(1)
-                .createdDate(LocalDateTime.now())
-                .lastModifiedDate(LocalDateTime.now())
-                .build();
+        return customerMap.get(id);
     }
 
     @Override
