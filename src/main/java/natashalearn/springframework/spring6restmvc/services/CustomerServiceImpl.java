@@ -57,4 +57,19 @@ public class CustomerServiceImpl implements CustomerService {
                 .lastModifiedDate(LocalDateTime.now())
                 .build();
     }
+
+    @Override
+    public Customer saveNewCustomer(Customer customer) {
+        Customer savedCustomer = Customer.builder()
+                .id(UUID.randomUUID())
+                .customerName(customer.getCustomerName())
+                .version(1)
+                .createdDate(LocalDateTime.now())
+                .lastModifiedDate(LocalDateTime.now())
+                .build();
+
+        customerMap.put(savedCustomer.getId(), savedCustomer);
+
+        return savedCustomer;
+    }
 }
