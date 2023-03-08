@@ -1,5 +1,7 @@
 package natashalearn.springframework.spring6restmvc.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import natashalearn.springframework.spring6restmvc.model.Beer;
 import natashalearn.springframework.spring6restmvc.services.BeerService;
 import natashalearn.springframework.spring6restmvc.services.BeerServiceImpl;
@@ -20,10 +22,24 @@ class BeerControllerTest {
     @Autowired
     MockMvc mockMvc;
 
+    @Autowired
+    ObjectMapper objectMapper;
+
     @MockBean
     BeerService beerService;
 
     BeerServiceImpl beerServiceImpl = new BeerServiceImpl();
+
+    @Test
+    void testCreateNewBeer() throws JsonProcessingException {
+        // ObjectMapper objectMapper = new ObjectMapper();
+        // If we're not using ObjectMapper from web context, to convert localdatetime to json we need to find the modules
+        // objectMapper.findAndRegisterModules();
+
+        Beer beer = beerServiceImpl.listBeers().get(0);
+
+        System.out.println(objectMapper.writeValueAsString(beer));
+    }
 
     @Test
     void testListBeers() throws Exception {
